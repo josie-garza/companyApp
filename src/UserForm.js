@@ -1,0 +1,29 @@
+import React from 'react';
+import faker from 'faker';
+
+export default class UserForm extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      name: ''
+    };
+  }
+  changeName = (ev) => {
+    this.setState({ name: ev.target.value });
+  }
+  addUser = () => {
+    this.props.addUser({ name: this.state.name, id: faker.random.number()});
+    this.setState({ name: '' });
+  }
+  render(){
+    const { addRandomUser } = this.props;
+    const { name } = this.state;
+    const { changeName, addUser } = this;
+    const inValid = name.length === 0;
+    return (
+       <div style={ { marginBottom: '10px' } } >
+        <button onClick={ addRandomUser } className='btn btn-primary'>Add A Company</button>
+      </div>
+    );
+  }
+}
